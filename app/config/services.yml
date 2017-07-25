@@ -1,0 +1,18 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+    evohome_params:
+        username: "%evohome_username%"
+        password: "%evohome_password%"
+        applicationid: "%evohome_applicationid%"
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    evohome:
+        class: AppBundle\Utils\Evohome
+        arguments:
+            - "%evohome_params%"

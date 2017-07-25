@@ -1,0 +1,18 @@
+{#{% extends 'base.html.twig' %}#}
+{% extends 'AvanzuAdminThemeBundle:layout:base-layout.html.twig' %}
+
+{% block title %}Evohome{% endblock %}
+{% block page_title %}Temperatures{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block page_content %}
+    <table class="table table-condensed table-bordered table-hover">
+    {% for temp in temperatures %}
+        <tr>
+            <td>{{ temp.device.name }}</td>
+            <td>{{ temp.inserted|date }}</td>
+            <td>{{ temp.temperature }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
