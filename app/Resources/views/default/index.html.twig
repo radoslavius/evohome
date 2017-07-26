@@ -1,4 +1,3 @@
-{#{% extends 'base.html.twig' %}#}
 {% extends 'AvanzuAdminThemeBundle:layout:base-layout.html.twig' %}
 
 {% block title %}Evohome{% endblock %}
@@ -6,13 +5,67 @@
 {% block page_subtitle %}{% endblock %}
 
 {% block page_content %}
-    <table class="table table-condensed table-bordered table-hover">
-    {% for temp in temperatures %}
-        <tr>
-            <td>{{ temp.device.name }}</td>
-            <td>{{ temp.inserted|date }}</td>
-            <td>{{ temp.temperature }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+    <canvas id="jschart"></canvas>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById('jschart').getContext('2d');
+
+      var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+          labels: [{% for datetime,temperature in data|first %}"{{ datetime }}",{% endfor %}],
+          datasets: [{% for device,values in data %}{
+            data: [{% for datetime,temperature in values %}{{ temperature }},{% endfor %}],
+            label: "{{ devices[device].name }}",
+            fill: false,
+            borderColor: "{{ devices[device].color }}",
+            backgroundColor: "{{ devices[device].color }}",
+            lineTension:0.1
+          },{% endfor %}]
+        },
+
+        // Configuration options go here
+        options: {
+          responsive: true,
+//          title:{
+//            display:true,
+//            text:'Chart.js Line Chart'
+//          },
+          tooltips: {
+            mode: 'index',
+            intersect: false
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Time'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Temperature'
+              },
+              ticks: {
+                // forces step size to be 5 units
+                stepSize: 0.5
+              }
+            }]
+          }
+        }
+      });
+    </script>
 {% endblock %}
