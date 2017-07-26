@@ -23,4 +23,4 @@ bin/console evohome:pull_data
 
 ## Output example
 
-![Chart](https://github.com/radoslavius/evohome/master/doc/images/chart.jpg)
+![Chart](https://github.com/radoslavius/evohome/blob/master/doc/images/chart.jpg)
