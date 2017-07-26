@@ -1,7 +1,7 @@
 Evohome
 =======
 
-## Install:
+## Install
 
 ```
 clone git repository
@@ -12,11 +12,15 @@ bin/console assets:install --symlink
 bin/console avanzu:admin:fetch-vendor
 ```
 
-## Pull data from evohome to database:
+## Pull data from evohome to database
 
 bin/console evohome:pull_data
 
-## Inspirations:
+## Inspirations
 
 - https://github.com/watchforstock/evohome-client
 - http://dirkgroenen.nl/projects/2016-01-15/honeywell-API-endpoints-documentation
+
+## Output example
+
+![Chart](https://github.com/radoslavius/evohome/master/doc/images/chart.jpg)
